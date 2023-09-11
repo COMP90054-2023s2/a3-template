@@ -93,7 +93,7 @@ class DummyAgent(CaptureAgent):
     if not self.current_target == None:
       # if agent already have a goal
       pass
-    elif self.carrying == MAX_CAPACITY:
+    elif self.carrying == MAX_CAPACITY or len(self.getFood(gameState).asList())<=2:
       # if agent got all the food it needed
       # it will reach to the closest boundary with A* search (manhattanDistance as heuristic)
       self.current_target = self.getClosestPos(gameState,self.boundary)
@@ -154,7 +154,7 @@ class DummyAgent(CaptureAgent):
     from util import PriorityQueue
     myPQ = util.PriorityQueue()
     startState = problem.getStartState()
-    print(f"start states {startState}")
+    # print(f"start states {startState}")
     startNode = (startState, '',0, [])
     heuristic = problem._manhattanDistance
     myPQ.push(startNode,heuristic(startState))
