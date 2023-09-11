@@ -5,8 +5,8 @@ You must read fully and carefully the assignment specification and instructions 
 * **Course:** [COMP90054 AI Planning for Autonomy](https://handbook.unimelb.edu.au/subjects/comp90054) @ Semester 2, 2023
 * **Instructor:** Dr. Nir Lipovetzky and Prof. Adrian Pearce
 * **Deadline Team Registration:** Monday 18th September, 2023 @ 10:00 (start of Week 9)
-* **Deadline Preliminary Agent & Individual SELF-EV Submission:** Monday 25th September, 2023 @ 10:00 (start of Week 10)
-* **Deadline Code, Wiki report & Group SELF-EV final Submission:** Friday 13th October, 2023 @ 10:00 (end of Week 12)
+* **Deadline Preliminary Agent & Individual SELF-EV Submission:** Monday 25th September, 2023 @ 10:00 (start of Non-teaching week)
+* **Deadline Code, Wiki report & Group SELF-EV final Submission:** Friday 20th October, 2023 @ 10:00 (end of Week 12)
 * **Course Weight:** 35% total, comprising 10% (preliminary competition) + 10% (final competition) + 15% (Wiki)
 * **Assignment type:**: Groups of 3 (not 2 or 4!)
 * **Learning outcomes covered:** 1-5
@@ -24,8 +24,8 @@ The purpose of this project is to implement an autonomous agent that can play th
   * [1. Your tasks](#1-your-tasks)
      * [Important basic rules](#important-basic-rules)
   * [2. Deliverables and submission](#2-deliverables-and-submission)
-     * [Preliminary submission (Monday week 10)](#41-preliminary-submission)
-     * [Individual Self-reflection (Monday week 10)](#individual-reflection-monday-week-10)
+     * [Preliminary submission (Monday non-teaching week)](#41-preliminary-submission)
+     * [Individual Self-reflection (Monday non-teaching week)](#individual-reflection-monday-week-10)
      * [Code, Wiki and Group reflection Final submission (Friday week 12)](#42-contest-and-wiki)
   * [3. Pre-contest feedback tournaments](#3-pre-contest-feedback-tournaments)
   * [4. Marking criteria](#4-marking-criteria)
@@ -130,7 +130,7 @@ There will be two code submissions for this project, a wiki report, one group re
 
 Please registry your team by submitting [Project Contest Team Registration Form](https://forms.gle/DJYmXu9utKzRgurWA)
 
-### Preliminary submission: Monday 25th September, 2023 @ 10:00 (start of Week 10)
+### Preliminary submission: Monday 25th September, 2023 @ 10:00 (start of non-teaching week)
 
 In the **preliminary submission**, you are to:
 
@@ -140,7 +140,7 @@ In the **preliminary submission**, you are to:
 4. **Please use your own github account to commit your code.** Otherwise, you would not be able to get marks.
 5. Please make sure the commit in your submitted (tag) is your own original work.
 
-### Inidividual reflection: Monday 25th September, 2023 @ 10:00 (start of week 10)
+### Inidividual reflection: Monday 25th September, 2023 @ 10:00 (start of non-teaching week)
 
 Each team member submits a short individual reflection to Canvas (under Assignments) that answers the following questions:
 
@@ -158,9 +158,9 @@ Each team member submits a short individual reflection to Canvas (under Assignme
    * **Limitations and Possible future improvement**: whether there are limitations in your current agent, and what is the possible improvement, try to be more specific. Do not sweeping you goal here, for example simply mention "improve heuristic" or " improve weights" would not be a good practice. 
 
 
-### Wiki and final code submission (group): Friday 13th October, 2023 @ 10:00 (end of Week 12)
+### Wiki and final code submission (group): Friday 20th October, 2023 @ 10:00 (end of Week 12)
 
-In the **final group submission** (10:00 Friday 13th October, Week 12) you are to submit your final submission to the project, which includes:
+In the **final group submission** (10:00 Friday 20th October, Week 12) you are to submit your final submission to the project, which includes:
 
 
 1. All your files should be in your submission directory (`agents/t_XXX/`). The file `agents/t_XXX/myTeam.py` should contain your AI-based agent as the final team agent for playing in the competition.
