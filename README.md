@@ -174,7 +174,7 @@ In the **final group submission** (10:00 Friday 20th October, Week 12) you are t
 
 Submit your project substantially before the deadline. Submitting close to the deadline could be risky and you may fail to submit on time, for example due to loss of Internet connection or server delays. There will be **no extensions** based on these unforeseen problems.
 
-### Group reflection: Friday 13th October, 2023 @ 18:00 (end of week 12)
+### Group reflection: Friday 20th October, 2023 @ 10:00 (end of week 12)
 
 Each team member submits a short (one page maximum) PDF group reflection to Canvas (under Assignments) that answers the following questions:
 
