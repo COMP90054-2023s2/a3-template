@@ -280,7 +280,7 @@ You will quickly find that implementing search and learning agents is really har
 * [Modelling and abstraction for single-agent MDPs](https://gibberblot.github.io/rl-notes/single-agent/modelling-and-abstraction.html)
 * [Modelling and abstraction for multi-agent games](https://gibberblot.github.io/rl-notes/multi-agent/modelling-and-abstraction.html)
 
-These two sets of resources give types on how to increase the efficiency of your search/learning by changing the problem that you are solving. As noted in the [agents/generic/single_lookahead.py](agents/generic/single_lookahead.py), you can take the source code from the simulator and create your own simplified game that is easier to solve, and then use that information to play. E.g. one simple technique that sometimes works is to ignore your opponents moves all together, which reduces the branching factor and allows you to search further ahead. That may not work in every game (it would be terrible in chess), but it would be useful in SOME games.
+These two sets of resources give types on how to increase the efficiency of your search/learning by changing the problem that you are solving. You can create your own simplified game that is easier to solve, and then use that information to play. E.g. one simple technique that sometimes works is to ignore your opponents moves all together, which reduces the branching factor and allows you to search further ahead. That may not work in every game (it would be terrible in chess), but it would be useful in SOME games.
 
 
 ### How to create the Wiki
