@@ -61,6 +61,7 @@ from game import reconstituteGrid
 import sys, util, types, time, random, imp
 import keyboardAgents
 import os
+import json
 
 DIR_SCRIPT = sys.path[0]
 
@@ -818,6 +819,8 @@ def readCommand( argv ):
                     help=default('How many episodes are training (suppresses output)'), default=0)
   parser.add_option('-c', '--catchExceptions', action='store_true', default=False,
                     help='Catch exceptions and enforce time limits')
+  parser.add_option('-o', '--output', default="output/",
+                  help='the directory to store the output files')
 
   options, otherjunk = parser.parse_args(argv)
   assert len(otherjunk) == 0, "Unrecognized options: " + str(otherjunk)
@@ -853,7 +856,8 @@ def readCommand( argv ):
   if options.fixRandomSeed: random.seed('cs188')
 
   if options.recordLog:
-    sys.stdout = open('log-0', 'w')
+    log_path = os.path.join(options.output,"log.txt")
+    sys.stdout = open(log_path, 'w')
     sys.stderr = sys.stdout
 
   # Special case: recorded games don't use the runGames method or args structure
@@ -931,6 +935,10 @@ def readCommand( argv ):
     
     layouts.append(l)
     
+  # setup output directory
+  if not os.path.exists(options.output):
+    os.makedirs(options.output)
+    
   args['layouts'] = layouts
   args['length'] = options.time
   args['numGames'] = options.numGames
@@ -938,6 +946,11 @@ def readCommand( argv ):
   args['record'] = options.record
   args['catchExceptions'] = options.catchExceptions
   args['delay_step'] = options.delay_step
+  args['output'] = options.output
+  args['layout_str'] = options.layout
+  red_team_name = options.red.split("/")[-2]
+  blue_team_name = options.blue.split("/")[-2]
+  args['team_names'] = [red_team_name,blue_team_name]
   return args
 
 def randomLayout(seed = None):
@@ -1039,10 +1052,11 @@ def replayGame( layout, agents, actions, display, length, redTeamName, blueTeamN
     display.finish()
 
 
-def runGames( layouts, agents, display, length, numGames, record, numTraining, redTeamName, blueTeamName, muteAgents=False, catchExceptions=False, delay_step=0):
+def runGames( layouts, agents, display, length, numGames, record, numTraining, redTeamName, blueTeamName, muteAgents=False, catchExceptions=False, delay_step=0,output="output/",layout_str="",team_names=[]):
 
   rules = CaptureRules()
   games = []
+  game_records = []
 
   if numTraining > 0:
     print ('Playing %d training games' % numTraining)
@@ -1061,7 +1075,13 @@ def runGames( layouts, agents, display, length, numGames, record, numTraining, r
     g = rules.newGame( layout, agents, gameDisplay, length, muteAgents, catchExceptions )
     g.run(delay=delay_step)
     if not beQuiet: games.append(g)
-
+    # print(layout.layoutText)
+    game_record = {'layout': layout.layoutText, 
+                   'score': g.state.data.score,
+                  #  'agents': agents, 
+                  #  'actions': g.moveHistory, 
+                   'length': length, 'redTeamName': redTeamName, 'blueTeamName':blueTeamName, "replay_file_name":"" }
+    
     g.record = None
     if record:
       import time, pickle, game
@@ -1071,8 +1091,11 @@ def runGames( layouts, agents, display, length, numGames, record, numTraining, r
       #f.close()
       print("recorded")
       g.record = pickle.dumps(components)
-      with open('replay-%d'%i,'wb') as f:
+      game_record["replay_file_name"]='replay-%d'%i
+      replay_file_path = os.path.join(output,'replay-%d'%i)
+      with open(replay_file_path,'wb') as f:
         f.write(g.record)
+    game_records.append(game_record)
 
   if numGames > 1:
     scores = [game.state.data.score for game in games]
@@ -1083,7 +1106,38 @@ def runGames( layouts, agents, display, length, numGames, record, numTraining, r
     print ('Red Win Rate:  %d/%d (%.2f)' % ([s > 0 for s in scores].count(True), len(scores), redWinRate))
     print ('Blue Win Rate: %d/%d (%.2f)' % ([s < 0 for s in scores].count(True), len(scores), blueWinRate))
     print ('Record:       ', ', '.join([('Blue', 'Tie', 'Red')[max(0, min(2, 1 + s))] for s in scores]))
+  
+  scores = [game.state.data.score for game in games]
+  red_team_wins =  [s > 0 for s in scores].count(True)
+  blue_team_wins = [s < 0 for s in scores].count(True)
+  ties = [s == 0 for s in scores].count(True)
+  # for tournament record
+  with open("output/matches.json","r") as f:
+    matches = json.load(f)
+  
+  match_record = {
+    'layout_str': layout_str.split("/")[-1], 
+    'agents': [ a.__class__.__name__ for a in agents], 
+    # 'actions': g.moveHistory, 
+    'length': length, 
+    'wins' : red_team_wins,
+    'loses': blue_team_wins,
+    'ties': ties,
+    'redTeamName': redTeamName, 
+    'blueTeamName':blueTeamName,
+    'num_of_games': numGames,
+    'game_records': game_records
+    }
+  matches.update(match_record)
+  
+  # print(matches)
+  match_path = os.path.join(output,"matches.json")
+  with open(match_path,"w") as f:
+    json.dump(matches,f)
   return games
+
+
+
 
 def save_score(game):
     with open('score', 'w') as f:

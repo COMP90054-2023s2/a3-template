@@ -1,6 +1,6 @@
-image_name=docker_test
+image_name=2023s2_pacman_tournament
 image_tag=v0
-force_build=1
+force_build=0
 container_name=test_env
 CPU_limit=1
 RAM_limit=9g
