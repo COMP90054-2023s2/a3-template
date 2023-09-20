@@ -1112,8 +1112,11 @@ def runGames( layouts, agents, display, length, numGames, record, numTraining, r
   blue_team_wins = [s < 0 for s in scores].count(True)
   ties = [s == 0 for s in scores].count(True)
   # for tournament record
-  with open("output/matches.json","r") as f:
-    matches = json.load(f)
+  if os.path.exists("output/matches.json"):
+    with open("output/matches.json","r") as f:
+      matches = json.load(f)
+  else:
+    matches = dict()
   
   match_record = {
     'layout_str': layout_str.split("/")[-1], 
@@ -1131,6 +1134,8 @@ def runGames( layouts, agents, display, length, numGames, record, numTraining, r
   matches.update(match_record)
   
   # print(matches)
+  if not os.path.exists("output"):
+    os.makedirs("output")
   match_path = os.path.join(output,"matches.json")
   with open(match_path,"w") as f:
     json.dump(matches,f)
