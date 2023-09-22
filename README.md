@@ -5,7 +5,7 @@ You must read fully and carefully the assignment specification and instructions 
 * **Course:** [COMP90054 AI Planning for Autonomy](https://handbook.unimelb.edu.au/subjects/comp90054) @ Semester 2, 2023
 * **Instructor:** Dr. Nir Lipovetzky and Prof. Adrian Pearce
 * **Deadline Team Registration:** Monday 18th September, 2023 @ 10:00 (start of Week 9)
-* **Deadline Preliminary Agent & Individual SELF-EV Submission:** Monday 25th September, 2023 @ 10:00 (start of Non-teaching week)
+* **Deadline Preliminary Agent & Individual SELF-EV Submission:** Monday 2nd October, 2023 @ 10:00 (start of Week 10)
 * **Deadline Code, Wiki report & Group SELF-EV final Submission:** Friday 20th October, 2023 @ 10:00 (end of Week 12)
 * **Course Weight:** 35% total, comprising 10% (preliminary competition) + 10% (final competition) + 15% (Wiki)
 * **Assignment type:**: Groups of 3 (not 2 or 4!)
@@ -46,10 +46,10 @@ The purpose of this project is to implement an autonomous agent that can play th
 
 **Your first task** is to get into a team, add all team members to the team repository, and register your team's details on the [Project Contest Team Registration Form](https://forms.gle/DJYmXu9utKzRgurWA)
 
-**Your second task** is to get familiar with the code by developing an simple agent based on any one of the techniques listed below. This is an **individual** task. By completing this task, your teams should be able to have 3 or 4 decent agents to play with each other. In addition, each team member should understand more about the game and code.
+**Your second task** is to get familiar with the code by developing an simple agent team based on any one of the techniques listed below. This is an **individual** task. By completing this task, your teams should be able to have 3 or 4 decent agents to play with each other. In addition, each team member should understand more about the game and code.
 
 > :loudspeaker:
-You may want to look at the file [`baselineTeam.py`](agents/sample/baselineTeam.py), which contains a simple agent that looks ahead one move and selects the best moved based on a (currently empty) heuristic.
+You may want to look at the file [`baselineTeam.py`](agents/sample/baselineTeam.py), which contains a simple agent team that looks ahead one move and selects the best moved based on a (currently empty) heuristic.
 
 **Your third task** is to develop an autonomous agent team to play PACMAN Capture the Flag by suitably modifying file [`myTeam.py`](agents/t_000/myTeam.py) (and maybe some other auxiliarly files you may implement). The code submitted should be internally commented at high standards and be error-free and _never crash_. 
 
@@ -130,7 +130,7 @@ There will be two code submissions for this project, a wiki report, one group re
 
 Please registry your team by submitting [Project Contest Team Registration Form](https://forms.gle/DJYmXu9utKzRgurWA)
 
-### Preliminary submission: Monday 25th September, 2023 @ 10:00 (start of non-teaching week)
+### Preliminary submission: Monday 2nd October, 2023 @ 10:00 (start of week 10)
 
 In the **preliminary submission**, you are to:
 
@@ -140,7 +140,7 @@ In the **preliminary submission**, you are to:
 4. **Please use your own github account to commit your code.** Otherwise, you would not be able to get marks.
 5. Please make sure the commit in your submitted (tag) is your own original work.
 
-### Inidividual reflection: Monday 25th September, 2023 @ 10:00 (start of non-teaching week)
+### Inidividual reflection: Monday 2nd October, 2023 @ 10:00 (start of week 10)
 
 Each team member submits a short individual reflection to Canvas (under Assignments) that answers the following questions:
 
