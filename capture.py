@@ -77,6 +77,9 @@ DUMP_FOOD_ON_DEATH = True # if we have the gameplay element that dumps dots on d
 
 SCARED_TIME = 40
 
+# should be 100MB
+LOG_SIZE_LIMIT = 1024 * 1024 * 100
+
 def noisyDistance(pos1, pos2):
   return int(util.manhattanDistance(pos1, pos2) + random.choice(SONAR_NOISE_VALUES))
 
@@ -855,6 +858,10 @@ def readCommand( argv ):
 
   if options.fixRandomSeed: random.seed('cs188')
 
+  # setup output directory
+  if not os.path.exists(options.output):
+    os.makedirs(options.output)
+
   if options.recordLog:
     log_path = os.path.join(options.output,"log.txt")
     sys.stdout = open(log_path, 'w')
@@ -935,9 +942,7 @@ def readCommand( argv ):
     
     layouts.append(l)
     
-  # setup output directory
-  if not os.path.exists(options.output):
-    os.makedirs(options.output)
+
     
   args['layouts'] = layouts
   args['length'] = options.time
@@ -1112,8 +1117,10 @@ def runGames( layouts, agents, display, length, numGames, record, numTraining, r
   blue_team_wins = [s < 0 for s in scores].count(True)
   ties = [s == 0 for s in scores].count(True)
   # for tournament record
-  if os.path.exists("output/matches.json"):
-    with open("output/matches.json","r") as f:
+  
+  matches_path = os.path.join(output,"matches.json")
+  if os.path.exists(matches_path):
+    with open(matches_path,"r") as f:
       matches = json.load(f)
   else:
     matches = dict()
@@ -1136,8 +1143,8 @@ def runGames( layouts, agents, display, length, numGames, record, numTraining, r
   # print(matches)
   if not os.path.exists("output"):
     os.makedirs("output")
-  match_path = os.path.join(output,"matches.json")
-  with open(match_path,"w") as f:
+  matches_path = os.path.join(output,"matches.json")
+  with open(matches_path,"w") as f:
     json.dump(matches,f)
   return games
 
@@ -1147,6 +1154,15 @@ def runGames( layouts, agents, display, length, numGames, record, numTraining, r
 def save_score(game):
     with open('score', 'w') as f:
         print(game.state.data.score, file=f)
+        
+def custom_print(*args, **kwargs):
+  log_path = os.path.join(output_path,"log.txt")
+  file_size = os.stat(log_path).st_size
+  if file_size < LOG_SIZE_LIMIT:
+    original_print(*args, **kwargs)
+  else:
+    pass
+  
 
 if __name__ == '__main__':
   """
@@ -1159,9 +1175,22 @@ if __name__ == '__main__':
 
   > python capture.py --help
   """
+  print("Game Loading")
+
+  
+  
+  
   start_time = time.time()
   options = readCommand( sys.argv[1:] ) # Get game components based on input
+  output_path = options["output"]
+  
+  # custmised override the system buildin print to control the log size
+  import builtins
+  original_print = builtins.print
+  builtins.print = custom_print
+  
   games = runGames(**options)
+  
 
   save_score(games[0])
   print('\nTotal Time Game: %s'% round(time.time() - start_time, 0))
