@@ -952,6 +952,7 @@ def readCommand( argv ):
   args['catchExceptions'] = options.catchExceptions
   args['delay_step'] = options.delay_step
   args['output'] = options.output
+  args['recordLog'] = options.recordLog
   args['layout_str'] = options.layout
   red_team_name = options.red.split("/")[-2]
   blue_team_name = options.blue.split("/")[-2]
@@ -1057,7 +1058,7 @@ def replayGame( layout, agents, actions, display, length, redTeamName, blueTeamN
     display.finish()
 
 
-def runGames( layouts, agents, display, length, numGames, record, numTraining, redTeamName, blueTeamName, muteAgents=False, catchExceptions=False, delay_step=0,output="output/",layout_str="",team_names=[]):
+def runGames( layouts, agents, display, length, numGames, record, numTraining, redTeamName, blueTeamName, muteAgents=False, catchExceptions=False, delay_step=0,output="output/",layout_str="",team_names=[],recordLog = False):
 
   rules = CaptureRules()
   games = []
@@ -1183,15 +1184,13 @@ if __name__ == '__main__':
   start_time = time.time()
   options = readCommand( sys.argv[1:] ) # Get game components based on input
   output_path = options["output"]
-  
-  # custmised override the system buildin print to control the log size
-  import builtins
-  original_print = builtins.print
-  builtins.print = custom_print
+  if options["recordLog"]:
+    # custmised override the system buildin print to control the log size
+    import builtins
+    original_print = builtins.print
+    builtins.print = custom_print
   
   games = runGames(**options)
-  
-
   save_score(games[0])
   print('\nTotal Time Game: %s'% round(time.time() - start_time, 0))
   # import profile
